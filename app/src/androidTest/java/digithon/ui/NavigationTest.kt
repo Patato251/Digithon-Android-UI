@@ -23,6 +23,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
 import digithon.data.di.fakeQuotes
+import digithon.presentation.view.MainActivity
 
 @HiltAndroidTest
 class NavigationTest {

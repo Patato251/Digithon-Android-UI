@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package digithon.ui
+package digithon.presentation.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -24,7 +24,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
-import digithon.ui.theme.MyApplicationTheme
+import digithon.core.util.navigation.MainNavigation
+import digithon.presentation.util.theme.MyApplicationTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

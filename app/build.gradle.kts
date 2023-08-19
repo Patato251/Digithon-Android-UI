@@ -28,7 +28,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "digithon"
+        applicationId = "app.java.digithon"
         minSdk = 21
         targetSdk = 33
         versionCode = 1

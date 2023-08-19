@@ -14,28 +14,14 @@
  * limitations under the License.
  */
 
-package digithon.data.local.database
+package digithon.presentation.util.theme
 
-import androidx.room.Dao
-import androidx.room.Entity
-import androidx.room.Insert
-import androidx.room.PrimaryKey
-import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
+import androidx.compose.ui.graphics.Color
 
-@Entity
-data class Quote(
-    val name: String
-) {
-    @PrimaryKey(autoGenerate = true)
-    var uid: Int = 0
-}
+val Purple80 = Color(0xFFD0BCFF)
+val PurpleGrey80 = Color(0xFFCCC2DC)
+val Pink80 = Color(0xFFEFB8C8)
 
-@Dao
-interface QuoteDao {
-    @Query("SELECT * FROM quote ORDER BY uid DESC LIMIT 10")
-    fun getQuotes(): Flow<List<Quote>>
-
-    @Insert
-    suspend fun insertQuote(item: Quote)
-}
+val Purple40 = Color(0xFF6650a4)
+val PurpleGrey40 = Color(0xFF625b71)
+val Pink40 = Color(0xFF7D5260)

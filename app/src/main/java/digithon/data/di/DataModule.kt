@@ -20,10 +20,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import digithon.data.repository.QuoteRepositoryImpl
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import digithon.data.QuoteRepository
-import digithon.data.DefaultQuoteRepository
+import digithon.domain.repository.QuoteRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -34,7 +34,7 @@ interface DataModule {
     @Singleton
     @Binds
     fun bindsQuoteRepository(
-        quoteRepository: DefaultQuoteRepository
+        quoteRepository: QuoteRepositoryImpl
     ): QuoteRepository
 }
 

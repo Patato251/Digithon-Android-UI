@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package digithon.ui
+package digithon.core.util.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -23,14 +23,19 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import digithon.ui.quote.QuoteScreen
+//import digithon.presentation.ui.QuoteScreen
+import digithon.presentation.ui.MainMenuScreen
+import digithon.presentation.ui.PolicyDateScreen
+import digithon.presentation.ui.WelcomeScreen
 
 @Composable
 fun MainNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "main") {
-        composable("main") { QuoteScreen(modifier = Modifier.padding(16.dp)) }
-        // TODO: Add more destinations
+    NavHost(navController = navController, startDestination = Routes.welcomePage.name) {
+//        composable("main") { QuoteScreen(modifier = Modifier.padding(16.dp)) }
+        composable(Routes.welcomePage.name) { WelcomeScreen(navController, modifier = Modifier.padding(16.dp)) }
+        composable(Routes.mainMenu.name) { MainMenuScreen(navController, modifier = Modifier.padding(16.dp)) }
+        composable(Routes.policyDate.name) { PolicyDateScreen(navController, modifier = Modifier.padding(16.dp)) }
     }
 }

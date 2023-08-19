@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package digithon.ui.theme
+package digithon.presentation.util.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

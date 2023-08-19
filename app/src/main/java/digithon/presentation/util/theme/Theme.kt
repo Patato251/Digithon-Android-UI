@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package digithon.ui.theme
+package digithon.presentation.util.theme
 
 import android.app.Activity
 import android.os.Build

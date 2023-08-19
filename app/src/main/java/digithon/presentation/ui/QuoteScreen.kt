@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package digithon.ui.quote
+package digithon.presentation.ui
 
-import digithon.ui.theme.MyApplicationTheme
+import digithon.presentation.util.theme.MyApplicationTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,6 +36,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import digithon.presentation.viewModel.QuoteUiState
+import digithon.presentation.viewModel.QuoteViewModel
 
 @Composable
 fun QuoteScreen(modifier: Modifier = Modifier, viewModel: QuoteViewModel = hiltViewModel()) {

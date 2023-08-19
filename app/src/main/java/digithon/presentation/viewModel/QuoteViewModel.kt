@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package digithon.ui.quote
+package digithon.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,10 +25,10 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import digithon.data.QuoteRepository
-import digithon.ui.quote.QuoteUiState.Error
-import digithon.ui.quote.QuoteUiState.Loading
-import digithon.ui.quote.QuoteUiState.Success
+import digithon.domain.repository.QuoteRepository
+import digithon.presentation.viewModel.QuoteUiState.Error
+import digithon.presentation.viewModel.QuoteUiState.Loading
+import digithon.presentation.viewModel.QuoteUiState.Success
 import javax.inject.Inject
 
 @HiltViewModel

@@ -30,7 +30,7 @@
         android:name=".DigithonUi"
         tools:targetApi="31">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".presentation.view.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.DigithonUi">
             <intent-filter>

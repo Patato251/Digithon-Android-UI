@@ -20,7 +20,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
-import digithon.data.QuoteRepository
+import digithon.domain.repository.QuoteRepository
 import digithon.data.di.DataModule
 import digithon.data.di.FakeQuoteRepository
 

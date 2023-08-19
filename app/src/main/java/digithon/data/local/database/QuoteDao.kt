@@ -14,28 +14,19 @@
  * limitations under the License.
  */
 
-package digithon.data
+package digithon.data.local.database
 
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import digithon.domain.model.Quote
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import digithon.data.local.database.Quote
-import digithon.data.local.database.QuoteDao
-import javax.inject.Inject
 
-interface QuoteRepository {
-    val quotes: Flow<List<String>>
+@Dao
+interface QuoteDao {
+    @Query("SELECT * FROM quote ORDER BY uid DESC LIMIT 10")
+    fun getQuotes(): Flow<List<Quote>>
 
-    suspend fun add(name: String)
-}
-
-class DefaultQuoteRepository @Inject constructor(
-    private val quoteDao: QuoteDao
-) : QuoteRepository {
-
-    override val quotes: Flow<List<String>> =
-        quoteDao.getQuotes().map { items -> items.map { it.name } }
-
-    override suspend fun add(name: String) {
-        quoteDao.insertQuote(Quote(name = name))
-    }
+    @Insert
+    suspend fun insertQuote(item: Quote)
 }

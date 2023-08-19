@@ -24,7 +24,9 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import digithon.data.QuoteRepository
+import digithon.domain.repository.QuoteRepository
+import digithon.presentation.viewModel.QuoteUiState
+import digithon.presentation.viewModel.QuoteViewModel
 
 /**
  * Example local unit test, which will execute on the development machine (host).

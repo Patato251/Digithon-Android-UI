@@ -23,18 +23,19 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import digithon.data.local.database.Quote
+import digithon.domain.model.Quote
 import digithon.data.local.database.QuoteDao
+import digithon.data.repository.QuoteRepositoryImpl
 
 /**
- * Unit tests for [DefaultQuoteRepository].
+ * Unit tests for [QuoteRepositoryImpl].
  */
 @OptIn(ExperimentalCoroutinesApi::class) // TODO: Remove when stable
-class DefaultQuoteRepositoryTest {
+class QuoteRepositoryImplTest {
 
     @Test
     fun quotes_newItemSaved_itemIsReturned() = runTest {
-        val repository = DefaultQuoteRepository(FakeQuoteDao())
+        val repository = QuoteRepositoryImpl(FakeQuoteDao())
 
         repository.add("Repository")
 
