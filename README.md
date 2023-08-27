@@ -1,5 +1,4 @@
 # Digithon Android Mobile UI Prototype
-slay
 
 ## Description
 
