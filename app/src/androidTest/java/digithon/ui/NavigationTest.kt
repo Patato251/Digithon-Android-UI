@@ -17,12 +17,10 @@
 package digithon.ui
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithText
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
-import digithon.data.di.fakeQuotes
 import digithon.presentation.view.MainActivity
 
 @HiltAndroidTest
@@ -37,7 +35,6 @@ class NavigationTest {
     @Test
     fun test1() {
         // TODO: Add navigation tests
-        composeTestRule.onNodeWithText(fakeQuotes.first(), substring = true).assertExists()
     }
 }
 

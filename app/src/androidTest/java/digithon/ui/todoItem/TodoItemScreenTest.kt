@@ -14,24 +14,24 @@
  * limitations under the License.
  */
 
-package digithon.ui.quote
+package digithon.ui.todoItem
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import digithon.presentation.ui.QuoteScreen
+import digithon.presentation.ui.TodoScreen
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 /**
- * UI tests for [QuoteScreen].
+ * UI tests for [TodoScreen].
  */
 @RunWith(AndroidJUnit4::class)
-class QuoteScreenTest {
+class TodoItemScreenTest {
 
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
@@ -39,7 +39,7 @@ class QuoteScreenTest {
     @Before
     fun setup() {
         composeTestRule.setContent {
-            QuoteScreen(FAKE_DATA, onSave = {})
+            TodoScreen(FAKE_DATA, onSave = {})
         }
     }
 

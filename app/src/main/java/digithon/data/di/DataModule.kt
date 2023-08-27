@@ -21,29 +21,35 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import digithon.data.repository.QuoteRepositoryImpl
+import digithon.domain.model.Quote
+import digithon.domain.repository.QuoteRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import digithon.domain.repository.QuoteRepository
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 interface DataModule {
-
     @Singleton
     @Binds
-    fun bindsQuoteRepository(
+    fun bindQuoteRepository(
         quoteRepository: QuoteRepositoryImpl
     ): QuoteRepository
 }
 
 class FakeQuoteRepository @Inject constructor() : QuoteRepository {
-    override val quotes: Flow<List<String>> = flowOf(fakeQuotes)
-
-    override suspend fun add(name: String) {
+    override fun getNotes(): Flow<List<Quote>> = flowOf(fakeQuotes)
+    override suspend fun getQuoteById(quoteId: String): Quote {
         throw NotImplementedError()
     }
+    override suspend fun insertQuote(quote: Quote) {
+        throw NotImplementedError()
+    }
+    override suspend fun deleteQuote(quote: Quote) {
+        throw NotImplementedError()
+    }
+
 }
 
-val fakeQuotes = listOf("One", "Two", "Three")
+val fakeQuotes = listOf(Quote(quoteId = "QTETest", policyStartDate = System.currentTimeMillis(), dateCreated = System.currentTimeMillis(), recentInsurer = "TestInsurer", title = "Mr.", firstName = "FirstName", surname = "Surname"))

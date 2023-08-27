@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package digithon.data.local.database
+package digithon.data.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import digithon.domain.model.Quote
+import digithon.domain.model.TodoItem
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface QuoteDao {
-    @Query("SELECT * FROM quote ORDER BY uid DESC LIMIT 10")
-    fun getQuotes(): Flow<List<Quote>>
+interface TodoDao {
+    @Query("SELECT * FROM todoitem ORDER BY uid DESC LIMIT 10")
+    fun getTodoItem(): Flow<List<TodoItem>>
 
     @Insert
-    suspend fun insertQuote(item: Quote)
+    suspend fun insertTodoItem(item: TodoItem)
 }

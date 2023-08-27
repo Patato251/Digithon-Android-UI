@@ -41,15 +41,14 @@ private fun WelcomeScreenContents(navController: NavController, modifier: Modifi
         }
 
         Column() {
-            Column(modifier = Modifier.fillMaxSize(),
+            Column(modifier = Modifier
+                .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally) {
                 Image(
                     painter = painterResource(id = R.drawable.digithon_updated_logo),
                     contentDescription = "Digithon Logo",
                     contentScale = ContentScale.Fit,
                     modifier = Modifier.padding(bottom = 15.dp, top = 120.dp))
-
-//                Spacer(modifier = Modifier.weight(2f))
 
                 DefaultButton(
                     text = "GET STARTED",

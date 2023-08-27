@@ -5,5 +5,5 @@ enum class Routes {
     mainMenu,
     policyDate,
     policyDetails,
-    quoteDetails
+    summary,
 }

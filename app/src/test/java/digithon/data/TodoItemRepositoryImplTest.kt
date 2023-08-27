@@ -23,36 +23,36 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import digithon.domain.model.Quote
-import digithon.data.local.database.QuoteDao
-import digithon.data.repository.QuoteRepositoryImpl
+import digithon.domain.model.TodoItem
+import digithon.data.database.TodoDao
+import digithon.data.repository.TodoRepositoryImpl
 
 /**
- * Unit tests for [QuoteRepositoryImpl].
+ * Unit tests for [TodoRepositoryImpl].
  */
 @OptIn(ExperimentalCoroutinesApi::class) // TODO: Remove when stable
-class QuoteRepositoryImplTest {
+class TodoItemRepositoryImplTest {
 
     @Test
-    fun quotes_newItemSaved_itemIsReturned() = runTest {
-        val repository = QuoteRepositoryImpl(FakeQuoteDao())
+    fun todoItems_newItemSaved_itemIsReturned() = runTest {
+        val repository = TodoRepositoryImpl(FakeTodoDao())
 
         repository.add("Repository")
 
-        assertEquals(repository.quotes.first().size, 1)
+        assertEquals(repository.todoItems.first().size, 1)
     }
 
 }
 
-private class FakeQuoteDao : QuoteDao {
+private class FakeTodoDao : TodoDao {
 
-    private val data = mutableListOf<Quote>()
+    private val data = mutableListOf<TodoItem>()
 
-    override fun getQuotes(): Flow<List<Quote>> = flow {
+    override fun getTodoItem(): Flow<List<TodoItem>> = flow {
         emit(data)
     }
 
-    override suspend fun insertQuote(item: Quote) {
+    override suspend fun insertTodoItem(item: TodoItem) {
         data.add(0, item)
     }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package digithon.data.local.database
+package digithon.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

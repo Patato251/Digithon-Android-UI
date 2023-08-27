@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -64,28 +65,28 @@ fun MainMenuScreenContents(navController: NavController, modifier: Modifier) {
             DefaultButton(
                 text = "GET A NEW QUOTE",
                 onClick = { navController.navigate(Routes.policyDate.name) },
-                modifier = Modifier
+                modifier = Modifier.width(200.dp)
             )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             DefaultButton(
                 text = "CLAIM A QUOTE", onClick = { /*TODO*/ },
-                modifier = modifier
+                modifier = Modifier.width(200.dp)
             )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             DefaultButton(
                 text = "MAKE A CLAIM", onClick = { /*TODO*/ },
-                modifier = modifier
+                modifier = Modifier.width(200.dp)
             )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             DefaultButton(
                 text = "CONTACT US", onClick = { /*TODO*/ },
-                modifier = modifier
+                modifier = Modifier.width(200.dp)
             )
         }
     }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package digithon.ui.quote
+package digithon.ui.todoItem
 
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,9 +24,9 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import digithon.domain.repository.QuoteRepository
-import digithon.presentation.viewModel.QuoteUiState
-import digithon.presentation.viewModel.QuoteViewModel
+import digithon.domain.repository.TodoRepository
+import digithon.presentation.viewModel.TodoUiState
+import digithon.presentation.viewModel.TodoViewModel
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -34,25 +34,25 @@ import digithon.presentation.viewModel.QuoteViewModel
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @OptIn(ExperimentalCoroutinesApi::class) // TODO: Remove when stable
-class QuoteViewModelTest {
+class TodoItemViewModelTest {
     @Test
     fun uiState_initiallyLoading() = runTest {
-        val viewModel = QuoteViewModel(FakeQuoteRepository())
-        assertEquals(viewModel.uiState.first(), QuoteUiState.Loading)
+        val viewModel = TodoViewModel(FakeTodoRepository())
+        assertEquals(viewModel.uiState.first(), TodoUiState.Loading)
     }
 
     @Test
     fun uiState_onItemSaved_isDisplayed() = runTest {
-        val viewModel = QuoteViewModel(FakeQuoteRepository())
-        assertEquals(viewModel.uiState.first(), QuoteUiState.Loading)
+        val viewModel = TodoViewModel(FakeTodoRepository())
+        assertEquals(viewModel.uiState.first(), TodoUiState.Loading)
     }
 }
 
-private class FakeQuoteRepository : QuoteRepository {
+private class FakeTodoRepository : TodoRepository {
 
     private val data = mutableListOf<String>()
 
-    override val quotes: Flow<List<String>>
+    override val todoItems: Flow<List<String>>
         get() = flow { emit(data.toList()) }
 
     override suspend fun add(name: String) {

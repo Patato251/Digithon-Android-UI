@@ -17,26 +17,43 @@ fun DefaultButton(
     text: String,
     color: Color = Purple40,
     onClick: () -> Unit,
+    isEnabled: Boolean = true,
     modifier: Modifier
 ) {
-    Button(onClick = onClick, colors = ButtonDefaults.buttonColors(containerColor = color), shape = RoundedCornerShape(4.dp), modifier = modifier) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(containerColor = color),
+        shape = RoundedCornerShape(4.dp),
+        enabled = isEnabled,
+        modifier = modifier
+    ) {
         Text(text = text, color = Color.White)
     }
 }
 
 @Composable
-fun NavigationButton(text: String = "Next", onClick: () -> Unit, modifier: Modifier) {
-    DefaultButton(text = text, onClick = onClick, modifier = modifier.width(300.dp))
+fun NavigationButton(
+    text: String = "Next",
+    onClick: () -> Unit,
+    isEnabled: Boolean = true,
+    modifier: Modifier
+) {
+    DefaultButton(
+        text = text,
+        onClick = onClick,
+        isEnabled = isEnabled,
+        modifier = modifier.width(300.dp)
+    )
 }
 
 @Composable
 @Preview
 private fun DefaultButtonPreview() {
-    DefaultButton(text = "Test button", onClick = { }, modifier = Modifier)
+    DefaultButton(text = "Test button", onClick = { }, isEnabled = true, modifier = Modifier)
 }
 
 @Composable
 @Preview
 private fun NavigationButtonPreview() {
-    NavigationButton(onClick = { }, modifier = Modifier)
+    NavigationButton(onClick = { }, isEnabled = true, modifier = Modifier)
 }

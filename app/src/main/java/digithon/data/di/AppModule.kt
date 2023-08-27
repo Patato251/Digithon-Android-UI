@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package digithon.data.local.di
+package digithon.data.di
 
 import android.content.Context
 import androidx.room.Room
@@ -23,14 +23,20 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import digithon.data.local.database.AppDatabase
-import digithon.data.local.database.QuoteDao
+import digithon.data.database.AppDatabase
+import digithon.data.database.QuoteDao
+import digithon.domain.repository.QuoteRepository
+import digithon.domain.usecase.quoteUsecases.AddQuoteUseCase
+import digithon.domain.usecase.quoteUsecases.DeleteQuoteUseCase
+import digithon.domain.usecase.quoteUsecases.GetQuoteByIdUseCase
+import digithon.domain.usecase.quoteUsecases.GetQuotesUseCase
+import digithon.domain.usecase.quoteUsecases.QuoteUseCases
 import javax.inject.Singleton
 
 
 @Module
 @InstallIn(SingletonComponent::class)
-class DatabaseModule {
+class AppModule {
     @Provides
     fun provideQuoteDao(appDatabase: AppDatabase): QuoteDao {
         return appDatabase.quoteDao()
@@ -42,7 +48,21 @@ class DatabaseModule {
         return Room.databaseBuilder(
             appContext,
             AppDatabase::class.java,
-            "Quote"
-        ).build()
+            "Quote",)
+            // IMPORTANT: UNCOMMENT BELOW TO MIGRATE LOCAL DB TO NEW SCHEMA. WILL WIPE OUT LOCAL DB
+            // Change Version number in AppDatabase.kt file and uncomment for quick way to drop Db
+            //.fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideQuoteUseCases(repository: QuoteRepository): QuoteUseCases {
+        return QuoteUseCases(
+            getQuotesUseCase = GetQuotesUseCase(repository = repository),
+            deleteQuoteUseCase = DeleteQuoteUseCase(repository = repository),
+            addQuoteUseCase = AddQuoteUseCase(repository = repository),
+            getQuoteByIdUseCase = GetQuoteByIdUseCase(repository = repository)
+        )
     }
 }

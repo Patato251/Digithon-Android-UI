@@ -2,81 +2,87 @@ package digithon.presentation.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import digithon.core.presentation.components.DefaultTopAppBar
 import digithon.core.presentation.components.NavigationButton
 import digithon.core.util.navigation.Routes
+import digithon.presentation.event.QuoteEvent
 import digithon.presentation.util.theme.MyApplicationTheme
+import digithon.presentation.viewModel.QuoteViewModel
 
 @Composable
-fun PolicyDateScreen(navController: NavController, modifier: Modifier) {
-    PolicyDateContent(navController, modifier)
+fun PolicyDateScreen(navController: NavController, modifier: Modifier, viewModel: QuoteViewModel) {
+    PolicyDateContent(navController, modifier, viewModel)
 }
 
-//TODO: Setup Save state for Picked date to be stored in mutableState of/state model
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PolicyDateContent(navController: NavController, modifier: Modifier) {
+fun PolicyDateContent(navController: NavController, modifier: Modifier, viewModel: QuoteViewModel) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
+    val uiState = viewModel.uiState.collectAsState()
+    val datePickerState =
+        rememberDatePickerState(initialSelectedDateMillis = uiState.value.policyStartDate)
+
     Scaffold(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             DefaultTopAppBar(
                 "POLICY START DATE",
                 onClick = { navController.navigate(Routes.mainMenu.name) },
-                modifier = modifier
+                modifier = modifier,
+                scrollBehavior = scrollBehavior
             )
         }
-    ) { paddingValues ->
-        paddingValues.calculateTopPadding()
-
+    ) {
         Column(
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier.fillMaxSize()
+            modifier = modifier
+                .fillMaxSize()
+                .padding(top = it.calculateTopPadding())
         ) {
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = "When would you like the policy to start?",
-                    fontWeight = FontWeight.ExtraBold
-                )
-            }
+            Text(
+                text = "When would you like the policy to start?",
+                fontWeight = FontWeight.ExtraBold
+            )
 
-            Row {
-                val datePickerState = rememberDatePickerState(initialSelectedDateMillis = null)
-                DatePicker(
-                    state = datePickerState,
-                    modifier = Modifier.padding(16.dp),
-                    title = null
-                )
-                //                Text("Selected date timestamp: ${datePickerState.selectedDateMillis ?: "no selection"}")
-            }
+            DatePicker(
+                state = datePickerState,
+                title = null
+            )
 
             Column() {
                 NavigationButton(
-                    text = "Back",
-                    onClick = { navController.navigate(Routes.mainMenu.name) },
+                    onClick = {
+                        viewModel.onEvent(QuoteEvent.EnteredDate(datePickerState.selectedDateMillis.toString()))
+                        navController.navigate(Routes.policyDetails.name)
+                    },
+                    isEnabled = true,
                     modifier = modifier
                 )
                 NavigationButton(
-                    onClick = { navController.navigate(Routes.policyDetails.name) },
+                    text = "Back",
+                    onClick = { navController.navigate(Routes.mainMenu.name) },
                     modifier = modifier
                 )
             }
@@ -89,6 +95,10 @@ fun PolicyDateContent(navController: NavController, modifier: Modifier) {
 @Preview
 private fun PolicyDateContentPreview() {
     MyApplicationTheme {
-        PolicyDateContent(navController = rememberNavController(), modifier = Modifier)
+        PolicyDateContent(
+            navController = rememberNavController(),
+            modifier = Modifier,
+            viewModel = hiltViewModel()
+        )
     }
 }
