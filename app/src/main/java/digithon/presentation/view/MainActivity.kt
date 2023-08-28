@@ -30,6 +30,7 @@ import digithon.presentation.util.theme.MyApplicationTheme
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    // MainActivity: Main entry point of the application
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

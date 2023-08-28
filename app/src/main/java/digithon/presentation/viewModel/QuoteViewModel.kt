@@ -23,6 +23,10 @@ class QuoteViewModel @Inject constructor(
     private val quoteUseCases: QuoteUseCases
 ) : ViewModel() {
 
+    /*
+    * private value declaractions: Defines any relevant values/consts that will be needed for
+    * state management and event management
+    * */
     private val errorList = listOf("Mr.", "Mrs.", "Miss", "Ms.", "Dr.", "Sir")
 
     private val _uiState = MutableStateFlow(QuoteUiState())
@@ -31,6 +35,10 @@ class QuoteViewModel @Inject constructor(
     private val _eventFlow = MutableSharedFlow<UiEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
+    /*
+    * onEvent function: Defines interactions between screen and state. Allows for UI to present
+    * relevant changes to components as well as store relevant state data for usage later on
+    * */
     fun onEvent(event: QuoteEvent) {
         when(event) {
             is QuoteEvent.EnteredTitle -> {
